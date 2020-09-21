@@ -14,6 +14,14 @@
 #     Ian Craggs - initial version
 #*******************************************************************************/
 
-add_subdirectory(linux)
-add_subdirectory(aiot_c_demo)
-add_subdirectory(onenet_c_demo)
+
+add_executable(
+  onenet_c_demo
+  hmac_sha1.c
+  base64.c
+  onenet_c_demo.c
+  onenet_mqtt_sign.c
+)
+target_link_libraries(onenet_c_demo paho-embed-mqtt3cc paho-embed-mqtt3c)
+target_include_directories(onenet_c_demo PRIVATE "../../src" "../../src/linux")
+target_compile_definitions(onenet_c_demo PRIVATE MQTTCLIENT_PLATFORM_HEADER=MQTTLinux.h)
